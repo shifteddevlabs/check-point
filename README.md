@@ -78,5 +78,8 @@ Copy [`reference/review-context-template.md`](reference/review-context-template.
 ## What this specialist will not do
 Design critique, refactoring suggestions, performance benchmarking, style and formatting opinions, architecture proposals, documentation review. Those are different jobs and different specialists. This one finds bugs.
 
+## P.S.
+Internally codenamed the **M.A.D. Reviewer**. Modified, Added, Deleted: the only git statuses that matter for review. Now you know.
+
 ## License
 MIT. Copy, modify, ship.
