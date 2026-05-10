@@ -1,4 +1,6 @@
-# Code Review Specialist
+# Check Point
+
+**Repo name:** `code-review-specialist` stays unchanged for contest/submission continuity. **Product name:** Check Point.
 
 An independent senior code reviewer that finds real bugs in pull requests and code diffs without drowning you in style nits or false positives. Built around one hard-won rule: **the writer cannot review their own code**.
 
@@ -41,12 +43,12 @@ The methodology is portable. The specialist works in any agent platform that can
 1. Clone or download this folder.
 2. Create a new Project.
 3. Upload the four root markdown files plus the `reference/` folder contents to the Project knowledge.
-4. Start a new chat in the Project and paste your diff. Tell the reviewer: *"Review this diff using the code-review specialist. Here is `git diff --staged` and the full file content of `<filename>`."*
+4. Start a new chat in the Project and paste your diff. Tell the reviewer: *"Review this diff using Check Point. Here is `git diff --staged` and the full file content of `<filename>`."*
 
 **Claude Code, Cursor, or any agent CLI**
 1. Clone this folder into your repo (e.g. as `.claude/specialists/code-reviewer/`).
 2. Reference it in your `CLAUDE.md`, `.cursorrules`, or system prompt: *"When asked to review code, follow `code-reviewer/rules.md`. Use `code-reviewer/identity.md` for voice. Apply `code-reviewer/reference/concurrency-checklist.md` to any async or lifecycle code in the diff."*
-3. Run a review by saying: *"Review the staged diff using the code-reviewer specialist."*
+3. Run a review by saying: *"Review the staged diff using Check Point."*
 
 **ChatGPT custom GPTs / Gemini Gems / other LLM tools**
 1. Create a custom GPT / Gem / equivalent.
@@ -79,7 +81,7 @@ Copy [`reference/review-context-template.md`](reference/review-context-template.
 Design critique, refactoring suggestions, performance benchmarking, style and formatting opinions, architecture proposals, documentation review. Those are different jobs and different specialists. This one finds bugs.
 
 ## P.S.
-Internally codenamed the **M.A.D. Reviewer**. Modified, Added, Deleted: the only git statuses that matter for review. Now you know.
+The mascot is the **M.A.D. Reviewer** duck. Modified, Added, Deleted: the only git statuses that matter for review. Now you know.
 
 ## License
 MIT. Copy, modify, ship.
