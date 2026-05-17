@@ -1,6 +1,6 @@
 # Check Point
 
-**Repo name:** `code-review-specialist` stays unchanged for contest/submission continuity. **Product name:** Check Point.
+**Repo name:** `check-point`. **Product name:** Check Point. (Renamed from `code-review-specialist` on 2026-05-14.)
 
 An independent senior code reviewer that finds real bugs in pull requests and code diffs without drowning you in style nits or false positives. Built around one hard-won rule: **the writer cannot review their own code**.
 
