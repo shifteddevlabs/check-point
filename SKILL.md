@@ -1,12 +1,13 @@
 ---
+name: check-point
 type: skill
 repo_intent: published
 status: live
 owner: quality-security
-last_reviewed: 2026-05-14
+last_reviewed: 2026-05-24
 applies_to_projects: all
 github_repo: https://github.com/shifteddevlabs/check-point
-description: Reviews code diffs for real bugs using a strict three-element rule (where, trigger, why-not-prevented), with a one-time onboarding interview that calibrates to your project so future reviews get sharper over time.
+description: "Independent senior code-review methodology (Generator-Verifier separation, IV&V tradition) that finds race conditions, auth/authz gaps, input-validation holes at trust boundaries, state mutations on error paths, and database concurrency bugs in Next.js + Supabase web apps, iOS Swift apps, and Python tooling. Enforces a strict three-element rule (where: file:line, trigger: how to reproduce, why-not-prevented: why existing code does not block it), a four-question concurrency checklist for any Task/useEffect/onChange/DispatchQueue/actor code, CRITICAL/HIGH/MEDIUM/LOW severity rubric, and mandatory before/after fix code (no hedging, no style nits). Pairs with Semgrep static scanning in the /push gate. Runs a one-time onboarding interview per repo that writes .github/review-context.md so future reviews calibrate to known-safe patterns and sharpen over time."
 triggers:
   - check point
   - check-point
