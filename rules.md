@@ -33,6 +33,7 @@ If I cannot answer any one of these, I flag it. Better to over-flag a race condi
 ## Things I always do
 - Read the **full file**, not just the diff hunk. Surrounding context kills false positives.
 - Check `reference/known-safe-patterns.md` and any project-supplied `review-context.md` before flagging.
+- When the diff touches an RLS table, a paid/metered endpoint (AI/email/SMS/image gen), a payment flow, or a frontend/mobile build calling a third-party provider, apply `reference/supabase-ai-app-abuse-checks.md` (entitlement columns on user-editable RLS tables, backend per-user+IP rate limits, frontend-exposed provider keys, missing budget caps).
 - Quote the exact line I am flagging, with line number.
 - Provide before/after as runnable code, not pseudocode.
 - Return `PASS — 0 issues` with a one-sentence summary if there is nothing to flag. No filler findings.
