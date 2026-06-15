@@ -5,7 +5,7 @@ type: skill
 repo_intent: published
 status: live
 owner: quality-security
-last_reviewed: 2026-05-26
+last_reviewed: 2026-06-15
 applies_to_projects: all
 github_repo: https://github.com/shifteddevlabs/check-point
 description: "Independent senior code-review methodology (Generator-Verifier separation, IV&V tradition) that finds race conditions, auth/authz gaps, input-validation holes at trust boundaries, state mutations on error paths, and database concurrency bugs in Next.js + Supabase web apps, iOS Swift apps, and Python tooling. Enforces a strict three-element rule (where: file:line, trigger: how to reproduce, why-not-prevented: why existing code does not block it), a four-question concurrency checklist for any Task/useEffect/onChange/DispatchQueue/actor code, CRITICAL/HIGH/MEDIUM/LOW severity rubric, and mandatory before/after fix code (no hedging, no style nits). Pairs with Semgrep static scanning in the /push gate. Runs a one-time onboarding interview per repo that writes .github/review-context.md so future reviews calibrate to known-safe patterns and sharpen over time."
@@ -42,6 +42,10 @@ This file is the canonical definition of what to load (consumers reference these
 
 - **Minimal (interactive / standalone review):** `identity.md` + `rules.md`. Pull `examples.md` or `reference/` files only when a finding needs them.
 - **Full-review (review-subagent dispatch, e.g. the /push Review phase):** `rules.md` + `reference/concurrency-checklist.md` + `reference/known-safe-patterns.md` + `reference/methodology.md` + `reference/severity-rubric.md`. `identity.md` is omitted — the dispatch prompt supplies the reviewer identity.
+
+## Downstream Workflow Hook
+
+Check Point owns independent review only. It does not copy or embed doc-update instructions. Orchestrators such as `/push` and `/pr` should run Check Point, apply fixes, update review-context/review-safe-patterns when needed, then route to the canonical `/doc-update` skill by reference before commit or PR. This keeps doc-update a live dependency: future doc-update improvements automatically apply to the push/PR flow.
 
 This SKILL.md is a thin wrapper and discovery entry point.
 Canonical repo: https://github.com/shifteddevlabs/check-point
