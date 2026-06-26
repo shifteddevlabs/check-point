@@ -44,3 +44,15 @@ silently dropping every row past the cap.
 - **Where:** the page-cap guard + the success / `last_success_at` stamp.
 - **Trigger:** the source has more than N pages; the loop exits at the cap, returns, and is recorded as a clean success.
 - **Why-not-prevented:** hitting the cap exits the same way as "cursor exhausted," with no distinguishing flag. **Flag:** when the loop exits with a cursor still present, raise a `truncated: true` / overflow signal and do NOT stamp an unqualified success. Caps must fail loud, never silently truncate.
+
+## 4. Secret query param in a browser URL — GA4 / Sentry Replay exfiltration — HIGH (silent token leak)
+
+A secret in a browser URL query string (`?token=XYZ`, `?access_token=XYZ`) is captured automatically by two client-side observability tools with no log statement, bypassing any server-side paging-URL redaction.
+
+1. **GA4 via `page_location`:** `gtag` fires a `page_view` hit including `page_location: window.location.href` (full URL, query string and all) on every navigation. The token lands in Google Analytics reports (default ~14-month retention).
+2. **Sentry Session Replay / transaction URLs:** Replay captures the URL bar; Sentry does NOT strip query params by default, so any `?token=` appears in Replay events and breadcrumbs.
+
+- **Where:** any page that (a) puts a secret in the query string and (b) loads `gtag.js` or Sentry Session Replay.
+- **Trigger:** the user navigates to a URL with `?token=` (or any `*token*`/`*secret*` param); GA4 fires on page load, Sentry on any error/sampled session.
+- **Why-not-prevented:** server-side paging-URL guards (Check 1) redact before a server log, but do nothing about the browser's own analytics/observability SDKs — no server is involved in this path.
+- **Fix:** (1) never put a session secret in the URL — `router.replace` to strip it from the address bar immediately after reading, or pass it out-of-band (POST body, HTTP-only cookie, `sessionStorage`); (2) if GA4 is present, set `page_location: location.pathname` to suppress the query string; if Sentry Replay is present, add a `beforeAddRecordingEvent` (and `beforeSend`) hook that strips `*token*`/`*secret*` params from every URL.
