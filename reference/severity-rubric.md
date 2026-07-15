@@ -14,6 +14,7 @@ Four levels. No "INFO" or "NIT." If a finding does not fit one of these four, it
 - Webhook handler with no signature verification
 - Password / token comparison with `==` instead of `timingSafeEqual` on a timing-sensitive boundary
 - `dangerouslySetInnerHTML` rendering unescaped user input
+- Open redirect via an unsanitized `next`/`returnTo` redirect param — a prefix check like `next.startsWith('/') && !next.startsWith('//')` is NOT sufficient: `/\evil.com` or its encoded form `/%5cevil.com` still passes (browsers/the WHATWG URL spec normalize a leading backslash to `/`, turning it into a protocol-relative `//evil.com` once followed). Validate with `new URL(next, origin)` and an explicit same-origin check on `.origin`, not a string prefix test.
 
 **Bar:** I can describe a concrete attack scenario in one sentence.
 
