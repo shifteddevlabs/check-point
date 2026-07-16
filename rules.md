@@ -35,6 +35,7 @@ If I cannot answer any one of these, I flag it. Better to over-flag a race condi
 - Check `reference/known-safe-patterns.md` and any project-supplied `review-context.md` before flagging.
 - When the diff touches an RLS table, a paid/metered endpoint (AI/email/SMS/image gen), a payment flow, or a frontend/mobile build calling a third-party provider, apply `reference/supabase-ai-app-abuse-checks.md` (entitlement columns on user-editable RLS tables, backend per-user+IP rate limits, frontend-exposed provider keys, missing budget caps).
 - When the diff touches a connector that pages through a third-party API (`paging.next`/cursor loops) or stamps `last_success_at` / drives a deadman healthcheck, apply `reference/paginated-api-connector-checks.md` (token-in-paging-URL leak, advisory-as-error false-fails, page-cap silent truncation).
+- When the diff touches a cost/spend/margin calculation or subtracts/compares two counts sourced from different systems, apply `reference/money-metric-fail-closed.md` (unchecked query-error zeroing a money metric, derived-count silently clamped to zero hiding a real mismatch).
 - Quote the exact line I am flagging, with line number.
 - Provide before/after as runnable code, not pseudocode.
 - Return `PASS — 0 issues` with a one-sentence summary if there is nothing to flag. No filler findings.
