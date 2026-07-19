@@ -73,6 +73,10 @@ The first time you ask the reviewer to review a diff in a new project, it pauses
 - `reference/known-safe-patterns.md` — universal patterns that look like bugs but are not
 - `reference/severity-rubric.md` — when to use CRITICAL / HIGH / MEDIUM / LOW
 - `reference/review-context-template.md` — drop-in template for project-specific safe patterns
+- `reference/money-metric-fail-closed.md` — fail-closed checks for any diff computing a financial metric or a derived count from two independently-sourced values
+- `reference/paginated-api-connector-checks.md` — abuse checks for connectors that page through a third-party API and write results to a DB or health signal
+- `reference/supabase-ai-app-abuse-checks.md` — abuse checks for AI-built Supabase/Firebase + LLM apps (RLS, metered endpoints, payment flows)
+- `reference/generator-verifier-separation-value.md` — value log of real regressions an independent reviewer caught that the writer's own self-review missed
 
 ## Optional: project-specific tuning
 Copy [`reference/review-context-template.md`](reference/review-context-template.md) to `.github/review-context.md` in your own repo and fill it in (or let the first-run interview do it for you). The reviewer reads it before every review and stops flagging your project's intentional-but-unusual patterns. This is how reviews get smarter over time without re-litigating the same arguments every week.
