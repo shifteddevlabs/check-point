@@ -23,8 +23,3 @@ Each check obeys the three-element rule: only raised if I can name the *where*, 
 - **Trigger:** `b > a` due to window skew or attribution lag between the two sources; the UI shows `0` for the derived value with no indication anything is off.
 - **Why-not-prevented:** the clamp exists specifically to suppress the negative-number case, which also suppresses the signal that something needs investigating.
 - **Fix:** keep the clamp for display (never show a negative), but compute and surface an explicit mismatch flag/disclosure alongside it (e.g. "paid (X) > total (Y); windows differ") rather than letting the clamped value read as an unremarkable zero.
-
-## Wiring (add to check-point/rules.md "Things I always do")
-Add one bullet alongside the existing `reference/*.md` triggers (after the `supabase-ai-app-abuse-checks.md` / `paginated-api-connector-checks.md` lines):
-
-> - When the diff touches a cost/spend/margin calculation or subtracts/compares two counts sourced from different systems, apply `reference/money-metric-fail-closed.md` (unchecked query-error zeroing a money metric, derived-count silently clamped to zero hiding a real mismatch).
